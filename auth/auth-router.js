@@ -13,12 +13,11 @@ router.post("/register", (req, res) => {
   const hash = bcrypt.hashSync(user.password, rounds);
   user.password = hash;
 
-  Users.add(user).then((response) => {
-    res
-      .status(201)
-      .json({ data: response })
-      .catch((error) => res.status(500).json({ message: error }));
-  });
+  Users.add(user)
+    .then((response) => {
+      res.status(201).json({ data: response });
+    })
+    .catch((error) => res.status(500).json({ message: error }));
 });
 
 function userToken(user) {
